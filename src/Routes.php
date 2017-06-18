@@ -13,6 +13,6 @@
 
 return [
     ['GET', '/', function () {
-        echo 'Tudo funcionando :)';
+      echo 'Tudo funcionando :)';
     }]
 ];

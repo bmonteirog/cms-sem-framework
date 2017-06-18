@@ -16,7 +16,10 @@
         "filp/whoops": "^2.1",
         "rdlowrey/auryn": "^1.4",
         "patricklouys/http": "^1.4",
-        "nikic/fast-route": "^1.2"
+        "nikic/fast-route": "^1.2",
+        "behat/behat": "^3.3",
+        "behat/mink": "^1.7",
+        "behat/mink-goutte-driver": "^1.2"
     },
     "autoload": {
         "psr-4": {
