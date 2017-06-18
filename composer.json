@@ -1,0 +1,22 @@
+{
+    "name": "bmonteirog/cms-sem-framework",
+    "description": "CMS de testes sem utilização de Framework",
+    "keywords": ["No Framework", "PHP"],
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "Bruno Monteiro",
+          "email": "bmonteirog@gmail.com",
+          "role": "Criador/Desenvolvedor"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "phpunit/phpunit": "6.2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "CMS\\": "src/"
+        }
+    }
+}
