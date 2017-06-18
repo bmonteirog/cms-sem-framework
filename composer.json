@@ -12,7 +12,11 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "phpunit/phpunit": "6.2.*"
+        "phpunit/phpunit": "6.2.*",
+        "filp/whoops": "^2.1",
+        "rdlowrey/auryn": "^1.4",
+        "patricklouys/http": "^1.4",
+        "nikic/fast-route": "^1.2"
     },
     "autoload": {
         "psr-4": {

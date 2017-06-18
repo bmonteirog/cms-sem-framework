@@ -8,3 +8,8 @@ Sistema de gerenciamento de conteúdo de testes desenvolvido sem utilizar framew
 - [ ] Criação e edição de conteúdos (posts) com os título, corpo e path  (acesso restrito)
 
 ## Bibliotecas utilizadas:
+
+- filp/whoops: Tratamento de Erros
+- rdlowrey/auryn: Injetor de Dependências
+- patricklouys/http: Abstração Http orientada à objetos
+- nikic/fast-route: Roteador
