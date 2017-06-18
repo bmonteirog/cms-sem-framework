@@ -128,9 +128,12 @@ switch ($routeInfo[0]) {
     * Método correto e rota encontrada, retornar status 200 e
     * chamar a classe apropriada:
     */
-    $handler = $routeInfo[1];
+    $className = $routeInfo[1][0];
+    $method = $routeInfo[1][1];
     $vars = $routeInfo[2];
-    call_user_func($handler, $vars);
+
+    $class = $injector->make($className);
+    $class->$method($vars);
     break;
 }
 

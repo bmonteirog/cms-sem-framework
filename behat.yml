@@ -1,0 +1,11 @@
+default:
+    suites:
+        default:
+            contexts:
+                - FeatureContext
+                - Behat\MinkExtension\Context\MinkContext
+    extensions:
+        Behat\MinkExtension:
+            base_url: http://127.0.0.1:8000/
+            goutte: ~
+            selenium2: ~

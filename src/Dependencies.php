@@ -17,6 +17,7 @@ $injector = new \Auryn\Injector;
 */
 $injector->alias('Http\Request', 'Http\HttpRequest');
 $injector->alias('Http\Response', 'Http\HttpResponse');
+$injector->alias('CMS\Template\Renderer', 'CMS\Template\TwigRenderer');
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,23 @@ $injector->define('Http\HttpRequest', [
   ':files' => $_FILES,
   ':server' => $_SERVER,
 ]);
+
+/*
+|--------------------------------------------------------------------------
+| Delegando a criação da classe para um método anônimo
+|--------------------------------------------------------------------------
+|
+| Como a instanciação do Twig precisa ser alimentada com os arquivos
+| disponíveis na pasta /templates, vamos criar uma função que leia
+| esse diretório e alimente a classe.
+|
+*/
+$injector->delegate('Twig_Environment', function () use ($injector) {
+  $loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/templates');
+  $twig = new Twig_Environment($loader);
+  return $twig;
+});
+
 
 // Retornando a instância do nosso Injetor para o Bootstrap.php
 return $injector;

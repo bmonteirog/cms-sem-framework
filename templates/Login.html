@@ -1,0 +1,38 @@
+{% extends "Layout.html" %}
+
+{% block content %}
+
+  <div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+      <div class="box" id="login-box">
+
+        <h5 class="title is-5 has-text-centered">Painel Administrativo</h5>
+
+        <form class="form" action="login" method="post">
+
+          <div class="field">
+            <div class="control">
+              <label class="label" for="login">Username</label>
+              <input class="input" type="text" name="Username" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <label class="label" for="password">Password</label>
+              <input class="input" type="password" name="Password" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <input class="button is-primary" type="submit" value="Login" name="Login">
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

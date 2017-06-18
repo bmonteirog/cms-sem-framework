@@ -4,15 +4,14 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Behat\MinkExtension\Context\MinkContext;
-
-require_once __DIR__.'/../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php';
+use Behat\MinkExtension\Context\RawMinkContext;
 
 /**
  * Defines application features from the specific context.
  */
-class FeatureContext implements MinkContext
+class FeatureContext extends RawMinkContext
 {
+
     /**
      * Initializes context.
      *
@@ -25,43 +24,11 @@ class FeatureContext implements MinkContext
     }
 
     /**
-     * @Given I am on :url
+     * @return \Behat\Mink\Element\DocumentElement
      */
-    public function iAmOn($url)
+    private function getPage()
     {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given I'm not logged in
-     */
-    public function imNotLoggedIn()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given I fill in :arg1 with :arg2
-     */
-    public function iFillInWith($arg1, $arg2)
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given I press :arg1
-     */
-    public function iPress($arg1)
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Then I should see :arg1
-     */
-    public function iShouldSee($arg1)
-    {
-        throw new PendingException();
+        return $this->getSession()->getPage();
     }
 
     /**
@@ -101,6 +68,6 @@ class FeatureContext implements MinkContext
      */
     public function iClick($arg1)
     {
-        throw new PendingException();
+      throw new PendingException();
     }
 }
