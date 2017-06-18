@@ -1,6 +1,10 @@
 <?php declare(strict_types = 1);
 
-// Definindo o Namespace da aplicação
+/*
+|--------------------------------------------------------------------------
+| Definindo o Namespace da aplicação
+|--------------------------------------------------------------------------
+*/
 namespace CMS;
 
 /*
@@ -32,6 +36,7 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
+
 /*
 |--------------------------------------------------------------------------
 | Registrando o Injetor de Dependência
@@ -45,6 +50,7 @@ $whoops->register();
 |
 */
 $injector = include('Dependencies.php');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +68,7 @@ $injector = include('Dependencies.php');
 */
 $request  = $injector->make('Http\Request');
 $response = $injector->make('Http\Response');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -93,8 +100,10 @@ $dispatcher = \FastRoute\simpleDispatcher($routesCallback);
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 
 /*
-| Aqui vamos resolver a rota de acordo com o método e o path e mostrar a
-| resposta apropriada:
+| Aqui vamos analisar a resposta do Roteador e mostrar o conteúdo apropriado.
+| Em ambiente de produção as respostas de erro deveriam mostrar uma tela
+| amigável ao usuário. Para efeitos de sistema de testes vamos apenas apresentar
+| uma resposta em texto plano.
 */
 switch ($routeInfo[0]) {
 
