@@ -14,20 +14,20 @@ Disponibilizei uma versão instalada de testes neste link: [cmsjust.brunomonteir
 
 ## Bibliotecas PHP utilizadas:
 
-- filp/whoops: Tratamento de Erros
-- rdlowrey/auryn: Injetor de Dependências
-- patricklouys/http: Abstração Http orientada à objetos
-- nikic/fast-route: Roteador
-- twig/twig: Template Engine
-- delight-im/auth: Authentication
-- plasticbrain/php-flash-messages: Flash messages
+- [Whoops](http://github.com/filp/whoops): Tratamento de Erros
+- [Auryn](http://github.com/rdlowrey/auryn): Injetor de Dependências
+- [FastRoute](http://github.com/nikic/FastRoute): Roteador
+- [Twig](http://github.com/twigphp/Twig): Template Engine
+- [patricklouys/http](http://github.com/patricklouys/http): Abstração Http orientada à objetos
+- [delight-im/auth](http://github.com/delight-im/PHP-Auth): Authentication
+- [plasticbrain/php-flash-messages](http://github.com/plasticbrain/php-flash-messages): Flash messages
 
 ## Bibliotecas FrontEnd
 
-- Bulma: Framework CSS
-- jQuery: Biblioteca JS
-- Webpack: Module Bundler
-- Laravel Mix: Api para o Webpack
+- [Bulma](https://github.com/jgthms/bulma): Framework CSS
+- [jQuery](https://github.com/jquery/jquery): Biblioteca JS
+- [Webpack](https://github.com/webpack): Module Bundler
+- [Laravel Mix](https://github.com/JeffreyWay/laravel-mix): Api para o Webpack
 
 ## Testes Funcionais
 
