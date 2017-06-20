@@ -12,7 +12,7 @@ $injector = new \Auryn\Injector;
 | e realizar todas as operações relacionadas à base de dados da aplicação
 |
 */
-$dbconfig = include('../config/database.php');
+$dbconfig = include('../config/db.php');
 $pdo = new PDO('mysql:host='.$dbconfig['host'].';dbname='.$dbconfig['database'].';charset=utf8', $dbconfig['username'], $dbconfig['password']);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $injector->share($pdo);

@@ -25,7 +25,7 @@ class FeatureContext extends RawMinkContext
      */
     public function __construct()
     {
-      $dbconfig = include(__DIR__.'/../../config/database.php');
+      $dbconfig = include(__DIR__.'/../../config/db.php');
       $this->pdo = new PDO('mysql:host='.$dbconfig['host'].';dbname='.$dbconfig['database'].';charset=utf8', $dbconfig['username'], $dbconfig['password']);
       $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
