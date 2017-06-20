@@ -30,7 +30,7 @@ class Homepage
     $this->authentication = $authentication;
 
     if(!$this->authentication->isLoggedIn())
-      return $this->response->redirect('login');
+      return $this->response->redirect('/login');
   }
 
   function show()
