@@ -1,3 +1,14 @@
+/*
+|  Método para converter uma string em uma Slug
+*/
+function convertToSlug(Text)
+{
+  return Text
+      .toLowerCase()
+      .replace(/ /g,'-')
+      .replace(/[^\w-]+/g,'');
+}
+
 $(document).ready( function(){
 
   // Toggle da Classe que ativa o menu do Painel em Mobile
@@ -11,5 +22,9 @@ $(document).ready( function(){
       $('.notification').fadeOut('normal');
     }, 3100);
   }
+
+  $('input[name=titulo]').on('keyup', function(){
+    $('input[name=path]').val(convertToSlug($(this).val()));
+  });
 
 });

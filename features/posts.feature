@@ -16,8 +16,8 @@ Scenario: List available Posts
 Scenario: Show a Post
   Given there are 1 posts
   And I am on "/"
-  When I press "Visualizar"
-  Then I should see "Voltar"
+  When I follow "post-teste-0"
+  Then I should see "Lorem ipsum"
 
 Scenario: Post not found
   Given I am on "/url-nao-existente"

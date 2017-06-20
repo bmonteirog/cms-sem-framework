@@ -16,7 +16,7 @@ return [
     ['GET', '/', ['CMS\Controllers\Homepage', 'index']],
     ['GET', '/posts/{slug}', ['CMS\Controllers\Homepage', 'show']],
 
-    ['GET', '/login', ['CMS\Controllers\Auth', 'login']],
+    ['GET', '/login', ['CMS\Controllers\Auth', 'login']], 
     ['POST', '/login', ['CMS\Controllers\Auth', 'postLogin']],
     ['GET', '/logout', ['CMS\Controllers\Auth', 'logout']],
 

@@ -15,6 +15,22 @@
     <div class="column is-two-third">
       <section class="section">
 
+        {% if detalhe == false %}
+
+          <p>
+            Post não encontrado.
+          </p>
+
+        {% else %}
+
+          <h2 class="subtitle has-text-centered">{{detalhe.titulo}}</h2>
+
+          <p>
+            {{detalhe.corpo}}
+          </p>
+
+        {% endif %}
+
       </section>
     </div>
 

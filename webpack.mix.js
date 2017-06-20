@@ -11,8 +11,17 @@ const { mix } = require('laravel-mix');
  |
  */
 
+/*
+| Copiando os arquivos de Vendor para a pasta de assets
+*/
 //mix.copy('node_modules/bulma/css/bulma.css', 'assets/');
 //mix.copy('node_modules/jquery/dist/jquery.js', 'assets/');
+
+/*
+| Aqui vamos:
+| Compilar o arquivo .less e enviando para /public
+| Concatenar os scripts e enviar para /public
+*/
 mix.less('assets/app.less', 'public/css')
    .scripts([
      'node_modules/jquery/dist/jquery.js',

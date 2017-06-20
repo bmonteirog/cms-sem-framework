@@ -17,20 +17,23 @@
           <div class="field">
             <div class="control">
               <label class="label" for="login">Username</label>
-              <input class="input" type="text" name="Username">
+              <input class="input" type="text" name="Username" required autofocus id="inputusername">
             </div>
           </div>
 
           <div class="field">
             <div class="control">
               <label class="label" for="password">Password</label>
-              <input class="input" type="password" name="Password">
+              <input class="input" type="password" name="Password" required id="inputpassword">
             </div>
           </div>
 
+          <hr>
+
           <div class="field">
             <div class="control">
-              <input class="button is-primary" type="submit" value="Login" name="Login">
+              <input class="button is-primary is-pulled-right" type="submit" value="Login" name="Login" id="inputsubmit">
+              <a href="/" class="button" title="Voltar para a Home">Voltar para a Home</a>
             </div>
           </div>
 

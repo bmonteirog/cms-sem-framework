@@ -17,8 +17,6 @@
       <div class="notification is-success has-text-centered">{{ flash.display }}</div>
     {% endif %}
 
-
-
     <hr>
 
     {% if posts|length > 0 %}
@@ -33,7 +31,7 @@
         </thead>
         <tbody>
           {% for post in posts %}
-            <tr>
+            <tr class="post-row">
               <td>{{ post.titulo }}</td>
               <td>{{ post.path }}</td>
               <td class="td-controls">

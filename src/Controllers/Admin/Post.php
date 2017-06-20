@@ -16,6 +16,7 @@ class Post
   private $renderer;
   private $authentication;
   private $flash;
+  private $pdo;
 
   public function __construct(
     Request $request,
@@ -25,12 +26,20 @@ class Post
     PDO $pdo)
   {
     $this->flash = new Flash;
+
+    /*
+    | Entregando as dependências à classe. O injetor é responsável por
+    | instanciar esses objetos automaticamente.
+    */
     $this->request = $request;
     $this->response = $response;
     $this->renderer = $renderer;
     $this->authentication = $authentication;
     $this->pdo = $pdo;
 
+    /*
+    | Verificação de Usuário logado
+    */
     if(!$this->authentication->isLoggedIn())
       return $this->response->redirect('login');
   }
@@ -40,14 +49,16 @@ class Post
   */
   public function index()
   {
-    $posts = $this->pdo->query('SELECT * FROM posts ORDER BY titulo');
+    $query = $this->pdo->query('SELECT * FROM posts ORDER BY titulo');
+    $posts = $query->fetchAll();
 
     $data = [
       'marcar' => 'posts',
-      'posts' => $posts,
-      'flash' => $this->flash
+      'posts'  => $posts,
+      'flash'  => $this->flash
     ];
-    $html = $this->renderer->render('Admin/Posts/index', $data);
+
+    $html = $this->renderer->render('Admin/Posts/Index', $data);
     $this->response->setContent($html);
   }
 
@@ -60,7 +71,7 @@ class Post
       'marcar' => 'posts',
       'flash' => $this->flash
     ];
-    $html = $this->renderer->render('Admin/Posts/create', $data);
+    $html = $this->renderer->render('Admin/Posts/Create', $data);
     $this->response->setContent($html);
   }
 
@@ -85,8 +96,8 @@ class Post
       $stmt = $this->pdo->prepare("INSERT INTO posts (titulo, corpo, path) VALUES(:titulo, :corpo, :path)");
       $stmt->execute([
         ':titulo' => $data['titulo'],
-        ':corpo' => $data['corpo'],
-        ':path' => $data['path']
+        ':corpo'  => $data['corpo'],
+        ':path'   => $data['path']
       ]);
 
       return $this->flash->success('Post cadastrado com sucesso!', '/admin/posts', true);
@@ -103,16 +114,21 @@ class Post
   public function edit($post_id)
   {
     $stmt = $this->pdo->prepare('SELECT * FROM posts WHERE id = :id LIMIT 1');
-    $stmt->bindParam(':id', $post_id['post_id']);
-    $stmt->execute();
+    $stmt->execute([
+      ':id' => $post_id['post_id']
+    ]);
+
     $post = $stmt->fetch();
+
+    if(!$post)
+      return $this->flash->error('Post não encontrado.', '/admin/posts', true);
 
     $data = [
       'marcar' => 'posts',
-      'flash' => $this->flash,
-      'post' => $post
+      'flash'  => $this->flash,
+      'post'   => $post
     ];
-    $html = $this->renderer->render('Admin/Posts/edit', $data);
+    $html = $this->renderer->render('Admin/Posts/Edit', $data);
     $this->response->setContent($html);
   }
 
@@ -121,7 +137,32 @@ class Post
   */
   public function update($post_id)
   {
+    $data = [
+      'titulo' => $this->request->getParameter('titulo'),
+      'corpo'  => $this->request->getParameter('corpo'),
+      'path'   => $this->request->getParameter('path')
+    ];
 
+    $validation = $this->validate($data, 'update', $post_id['post_id']);
+
+    if(!$validation['passes'])
+      return $this->flash->error($validation['msg'], $validation['url'], true);
+
+    try {
+
+      $stmt = $this->pdo->prepare("UPDATE posts SET titulo = :titulo, corpo = :corpo, path = :path WHERE id = :id");
+      $stmt->execute([
+        ':id'     => $post_id['post_id'],
+        ':titulo' => $data['titulo'],
+        ':corpo'  => $data['corpo'],
+        ':path'   => $data['path']
+      ]);
+
+      return $this->flash->success('Post atualizado com sucesso!', '/admin/posts', true);
+
+    } catch (Exception $e) {
+      return $this->flash->error('Erro ao cadastrar post.', '/admin/posts/create', true);
+    }
   }
 
   /*
@@ -131,8 +172,9 @@ class Post
   {
     try {
       $stmt = $this->pdo->prepare('DELETE FROM posts WHERE id = :id');
-      $stmt->bindParam(':id', $post_id['post_id']);
-      $stmt->execute();
+      $stmt->execute([
+        ':id' => $post_id['post_id']
+      ]);
 
       return $this->flash->success('Post removido com sucesso!', '/admin/posts', true);
 

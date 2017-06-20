@@ -64,6 +64,11 @@ class Auth
       return $this->flash->error('A senha é obrigatória.', 'login', true);
 
     try {
+      /*
+      |  Limitando as tentativas de login consecutivas para evitar Brute Force
+      */
+      $this->authentication->setThrottlingOptions(5000, 86400);
+
       $this->authentication->loginWithUsername($data['username'], $data['password'], true);
       // Usuário logou com sucesso, redirecionar para a Home do Admin
       return $this->response->redirect('admin');
@@ -76,10 +81,7 @@ class Auth
       // Senha incorreta, redirecionar de volta para a tela de login
       return $this->flash->error('Senha incorreta', 'login', true);
     }
-    catch (\Exception $e){
-      // Erro ao logar, redirecionar de volta para a tela de login
-      return $this->flash->error('Erro ao logar', 'login', true);
-    }
+
   }
 
   /*

@@ -14,6 +14,22 @@
 
 .td-controls{
     width: 30%;
+    @media (max-width: 768px){
+      a{
+        margin-bottom: 5px;
+      }
+    }
+}
+
+.hero{
+  background: #4e3d83;
+  h1.title, h2.subtitle{
+    color:#F5F5F5;
+  }
+  a{
+    transition: all .3s ease-in;
+    &:hover{color:#B86BFF;}
+  }
 }
 
 html body nav.nav{

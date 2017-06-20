@@ -7,16 +7,31 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <title>CMS de Testes</title>
-  <link href="css/app.css" rel="stylesheet" type="text/css" />
+  <link href="/css/app.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
-  <div class="hero">
-    <div class="container is-fluid">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <a href="/" title="Página Inicial"><img src="/imgs/logo-just.png" alt="Just logo"></a>
+        <h1 class="title">
+          CMS de Teste - Posts Cadastrados
+        </h1>
+        <h2 class="subtitle">
+          Listando aqui os posts cadastrados no <a href="/admin" title="Painel de Administração">Painel de Administração</a>
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
       {% block content %}
       {% endblock %}
     </div>
-  </div>
+  </section>
+
 
 </body>
 </html>
