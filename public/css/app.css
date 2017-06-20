@@ -7165,6 +7165,33 @@ label.panel-block:hover {
 /*
 | Meus estilos:
 */
-#login-box {
+.spaced-box {
   margin-top: 50px;
+}
+.padding-vertical {
+  padding: 40px 0;
+}
+.td-controls {
+  width: 30%;
+}
+html body nav.nav {
+  background: #4e3d83;
+}
+@media (min-width: 768px) {
+  html body nav.nav .container a {
+    color: #fff;
+  }
+  html body nav.nav .container a:active,
+  html body nav.nav .container a:visited {
+    color: #fff;
+  }
+}
+html body nav.nav .container .nav-toggle {
+  transition: all 0.3s ease-in;
+}
+html body nav.nav .container .nav-toggle span {
+  background-color: #fff;
+}
+html body nav.nav .container .nav-toggle:hover span {
+  background-color: #4a4a4a;
 }

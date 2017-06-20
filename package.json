@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bulma": "^0.4.2",
+    "jquery": "^3.2.1",
     "laravel-mix": "^0.12.1",
     "webpack": "^2.6.1"
   }

@@ -5,6 +5,20 @@ $injector = new \Auryn\Injector;
 
 /*
 |--------------------------------------------------------------------------
+| Registrando a abstração da Base de Dados
+|--------------------------------------------------------------------------
+|
+| A classe de abstração da base de dados vai ser responsável por conectar
+| e realizar todas as operações relacionadas à base de dados da aplicação
+|
+*/
+$dbconfig = include('../config/database.php');
+$pdo = new PDO('mysql:host='.$dbconfig['host'].';dbname='.$dbconfig['database'].';charset=utf8', $dbconfig['username'], $dbconfig['password']);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$injector->share($pdo);
+
+/*
+|--------------------------------------------------------------------------
 | Registrando os Alias
 |--------------------------------------------------------------------------
 |
@@ -19,6 +33,7 @@ $injector->alias('Http\Request', 'Http\HttpRequest');
 $injector->alias('Http\Response', 'Http\HttpResponse');
 $injector->alias('CMS\Template\Renderer', 'CMS\Template\TwigRenderer');
 
+
 /*
 |--------------------------------------------------------------------------
 | Compartilhando as instâncias
@@ -30,6 +45,8 @@ $injector->alias('CMS\Template\Renderer', 'CMS\Template\TwigRenderer');
 */
 $injector->share('Http\HttpRequest');
 $injector->share('Http\HttpResponse');
+$injector->share('PDO');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +57,7 @@ $injector->share('Http\HttpResponse');
 | construtores das classes que estamos compartilhando.
 |
 */
+$injector->define('Delight\Auth\Auth', [':databaseConnection' => $pdo]);
 $injector->define('Http\HttpRequest', [
   ':get' => $_GET,
   ':post' => $_POST,
@@ -47,6 +65,7 @@ $injector->define('Http\HttpRequest', [
   ':files' => $_FILES,
   ':server' => $_SERVER,
 ]);
+
 
 /*
 |--------------------------------------------------------------------------

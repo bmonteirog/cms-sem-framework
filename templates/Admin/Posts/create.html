@@ -1,0 +1,57 @@
+{% extends "Admin/AdminLayout.html" %}
+
+{% block content %}
+
+  <section class="section padding-vertical">
+
+    <div class="is-clearfix">
+      <h1 class="title is-pulled-left">Adicionar Post</h1>
+    </div>
+
+    <hr>
+
+    <div class="columns">
+      <div class="column is-one-third">
+        <form action="/admin/posts/save" class="form" method="POST">
+
+          {% if flash.hasErrors %}
+            <div class="notification is-danger has-text-centered">{{ flash.display }}</div>
+          {% endif %}
+
+          <div class="field">
+            <div class="control">
+              <label class="label" for="titulo">Título</label>
+              <input class="input" type="text" id="titulo" name="titulo" >
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <label class="label" for="corpo">Corpo</label>
+              <textarea class="textarea" name="corpo" id="corpo"></textarea>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <label class="label" for="path">Path</label>
+              <input class="input" type="text" id="path" name="path" >
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="field">
+            <div class="control">
+              <a class="button" href="/admin/posts">Voltar</a>
+              <input class="button is-primary" type="submit" value="Salvar" name="Salvar">
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+  </section>
+
+{% endblock %}

@@ -4,6 +4,33 @@
 | Meus estilos:
 */
 
-#login-box{
+.spaced-box{
   margin-top: 50px;
+}
+
+.padding-vertical{
+  padding: 40px 0;
+}
+
+.td-controls{
+    width: 30%;
+}
+
+html body nav.nav{
+  background: #4e3d83;
+  .container{
+    @media (min-width: 768px){
+      a{
+        color:#fff;
+        &:active, &:visited{color:#fff;}
+      }
+    }
+    .nav-toggle {
+      transition: all .3s ease-in;
+      span{background-color: #fff;}
+      &:hover{
+        span{background-color:#4a4a4a;}
+      }
+    }
+  }
 }

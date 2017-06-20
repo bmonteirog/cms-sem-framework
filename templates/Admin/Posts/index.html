@@ -1,0 +1,58 @@
+{% extends "Admin/AdminLayout.html" %}
+
+{% block content %}
+
+  <section class="section padding-vertical">
+
+    <div class="is-clearfix">
+      <h1 class="title is-pulled-left">Posts</h1>
+      <a href="/admin/posts/create" class="button is-primary is-pulled-right">Novo Post</a>
+    </div>
+
+    {% if flash.hasErrors %}
+      <div class="notification is-danger has-text-centered">{{ flash.display }}</div>
+    {% endif %}
+
+    {% if flash.hasMessages %}
+      <div class="notification is-success has-text-centered">{{ flash.display }}</div>
+    {% endif %}
+
+
+
+    <hr>
+
+    {% if posts|length > 0 %}
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Path</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in posts %}
+            <tr>
+              <td>{{ post.titulo }}</td>
+              <td>{{ post.path }}</td>
+              <td class="td-controls">
+                <a href="/admin/posts/edit/{{post.id}}" class="button is-info is-small">Alterar</a>
+                <a href="/admin/posts/destroy/{{post.id}}" class="button is-danger is-small">Remover</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    {% else %}
+
+      <p>
+        Nenhum post cadastrado até o momento.
+      </p>
+
+    {% endif %}
+
+  </section>
+
+{% endblock %}

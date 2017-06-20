@@ -6,7 +6,7 @@ Feature: List and read Posts
 Scenario: No Posts available
   Given there are 0 posts
   And I am on "/"
-  Then I should see "Nenhum post foi criado ainda."
+  Then I should see "Nenhum post cadastrado até o momento."
 
 Scenario: List available Posts
   Given there are 5 posts
@@ -14,9 +14,9 @@ Scenario: List available Posts
   Then I should see 5 posts
 
 Scenario: Show a Post
-  Given there are 1 post
+  Given there are 1 posts
   And I am on "/"
-  When I click "Visualizar"
+  When I press "Visualizar"
   Then I should see "Voltar"
 
 Scenario: Post not found

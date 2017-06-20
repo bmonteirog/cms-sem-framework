@@ -11,5 +11,10 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.copy('node_modules/bulma/css/bulma.css', 'assets/')
-   .less('assets/app.less', 'public/css');
+//mix.copy('node_modules/bulma/css/bulma.css', 'assets/');
+//mix.copy('node_modules/jquery/dist/jquery.js', 'assets/');
+mix.less('assets/app.less', 'public/css')
+   .scripts([
+     'node_modules/jquery/dist/jquery.js',
+     'assets/main.js'
+   ], 'public/js/main.js');

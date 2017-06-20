@@ -3,24 +3,28 @@
 {% block content %}
 
   <div class="columns">
-    <div class="column is-half is-offset-one-quarter">
-      <div class="box" id="login-box">
+    <div class="column is-one-third is-offset-one-third">
+      <div class="box spaced-box">
 
         <h5 class="title is-5 has-text-centered">Painel Administrativo</h5>
+
+        {% if flash.hasErrors %}
+          <div class="notification is-danger has-text-centered">{{ flash.display }}</div>
+        {% endif %}
 
         <form class="form" action="login" method="post">
 
           <div class="field">
             <div class="control">
               <label class="label" for="login">Username</label>
-              <input class="input" type="text" name="Username" required>
+              <input class="input" type="text" name="Username">
             </div>
           </div>
 
           <div class="field">
             <div class="control">
               <label class="label" for="password">Password</label>
-              <input class="input" type="password" name="Password" required>
+              <input class="input" type="password" name="Password">
             </div>
           </div>
 
