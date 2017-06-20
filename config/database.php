@@ -17,6 +17,6 @@ return [
   'username' => 'root',
 
   // Senha
-  'password' => 'senhatrupe'
+  'password' => 'senhadb'
 
 ];
