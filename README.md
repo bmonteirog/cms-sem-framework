@@ -22,7 +22,7 @@ Disponibilizei uma versão instalada de testes neste link: [cmsjust.brunomonteir
 - delight-im/auth: Authentication
 - plasticbrain/php-flash-messages: Flash messages
 
-## Bibliotecas FronEnt
+## Bibliotecas FrontEnd
 
 - Bulma: Framework CSS
 - jQuery: Biblioteca JS
