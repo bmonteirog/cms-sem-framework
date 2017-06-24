@@ -46,7 +46,7 @@ $injector->alias('CMS\Template\Renderer', 'CMS\Template\TwigRenderer');
 $injector->share('Http\HttpRequest');
 $injector->share('Http\HttpResponse');
 $injector->share('PDO');
-
+$injector->share('CMS\Models\PostModel');
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +83,13 @@ $injector->delegate('Twig_Environment', function () use ($injector) {
   return $twig;
 });
 
+/*
+|--------------------------------------------------------------------------
+| Instanciando o Model e compartilhando pela aplicação
+|--------------------------------------------------------------------------
+*/
+$postModel = $injector->make('CMS\Models\PostModel', [$pdo]);
+$injector->share('CMS\Models\PostModel');
 
 // Retornando a instância do nosso Injetor para o Bootstrap.php
 return $injector;

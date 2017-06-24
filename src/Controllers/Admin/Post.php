@@ -7,6 +7,7 @@ use Http\Response;
 use CMS\Template\Renderer;
 use Plasticbrain\FlashMessages\FlashMessages as Flash;
 use Delight\Auth\Auth as Authentication;
+use CMS\Models\PostModel;
 use PDO;
 
 class Post
@@ -16,13 +17,14 @@ class Post
   private $renderer;
   private $authentication;
   private $flash;
-  private $pdo;
+  private $postModel;
 
   public function __construct(
     Request $request,
     Response $response,
     Renderer $renderer,
     Authentication $authentication,
+    PostModel $postModel,
     PDO $pdo)
   {
     $this->flash = new Flash;
@@ -35,6 +37,7 @@ class Post
     $this->response = $response;
     $this->renderer = $renderer;
     $this->authentication = $authentication;
+    $this->postModel = $postModel;
     $this->pdo = $pdo;
 
     /*
@@ -49,12 +52,9 @@ class Post
   */
   public function index()
   {
-    $query = $this->pdo->query('SELECT * FROM posts ORDER BY titulo');
-    $posts = $query->fetchAll();
-
     $data = [
       'marcar' => 'posts',
-      'posts'  => $posts,
+      'posts'  => $this->postModel->all(),
       'flash'  => $this->flash
     ];
 
@@ -93,12 +93,7 @@ class Post
 
     try {
 
-      $stmt = $this->pdo->prepare("INSERT INTO posts (titulo, corpo, path) VALUES(:titulo, :corpo, :path)");
-      $stmt->execute([
-        ':titulo' => $data['titulo'],
-        ':corpo'  => $data['corpo'],
-        ':path'   => $data['path']
-      ]);
+      $post = $this->postModel->save($data);
 
       return $this->flash->success('Post cadastrado com sucesso!', '/admin/posts', true);
 
@@ -113,12 +108,7 @@ class Post
   */
   public function edit($post_id)
   {
-    $stmt = $this->pdo->prepare('SELECT * FROM posts WHERE id = :id LIMIT 1');
-    $stmt->execute([
-      ':id' => $post_id['post_id']
-    ]);
-
-    $post = $stmt->fetch();
+    $post = $this->postModel->find($post_id['post_id']);
 
     if(!$post)
       return $this->flash->error('Post não encontrado.', '/admin/posts', true);
@@ -150,13 +140,7 @@ class Post
 
     try {
 
-      $stmt = $this->pdo->prepare("UPDATE posts SET titulo = :titulo, corpo = :corpo, path = :path WHERE id = :id");
-      $stmt->execute([
-        ':id'     => $post_id['post_id'],
-        ':titulo' => $data['titulo'],
-        ':corpo'  => $data['corpo'],
-        ':path'   => $data['path']
-      ]);
+      $post = $this->postModel->update($post_id['post_id'], $data);
 
       return $this->flash->success('Post atualizado com sucesso!', '/admin/posts', true);
 
@@ -171,10 +155,8 @@ class Post
   public function destroy($post_id)
   {
     try {
-      $stmt = $this->pdo->prepare('DELETE FROM posts WHERE id = :id');
-      $stmt->execute([
-        ':id' => $post_id['post_id']
-      ]);
+
+      $post = $this->postModel->destroy($post_id['post_id']);
 
       return $this->flash->success('Post removido com sucesso!', '/admin/posts', true);
 

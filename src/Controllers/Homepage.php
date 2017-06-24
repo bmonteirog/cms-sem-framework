@@ -5,7 +5,7 @@ namespace CMS\Controllers;
 use Http\Request;
 use Http\Response;
 use CMS\Template\Renderer;
-use PDO;
+use CMS\Models\PostModel;
 
 class Homepage
 {
@@ -13,24 +13,23 @@ class Homepage
   private $request;
   private $response;
   private $renderer;
-  private $pdo;
+  private $postModel;
 
   public function __construct(
     Request $request,
     Response $response,
     Renderer $renderer,
-    PDO $pdo)
+    PostModel $postModel)
   {
     $this->request = $request;
     $this->response = $response;
     $this->renderer = $renderer;
-    $this->pdo = $pdo;
+    $this->postModel = $postModel;
   }
 
   public function index()
   {
-    $query = $this->pdo->query('SELECT * FROM posts ORDER BY titulo');
-    $posts = $query->fetchAll();
+    $posts = $this->postModel->all();
 
     $data = ['posts'  => $posts];
 
@@ -40,15 +39,10 @@ class Homepage
 
   public function show($slug)
   {
-    $query = $this->pdo->query('SELECT * FROM posts ORDER BY titulo');
-    $posts = $query->fetchAll();
+    $posts = $this->postModel->all();
 
-    $stmt = $this->pdo->prepare('SELECT * FROM posts WHERE path = :path LIMIT 1');
-    $stmt->execute([
-      ':path' => $slug['slug']
-    ]);
 
-    $detalhe = $stmt->fetch();
+    $detalhe = $this->postModel->findBySlug($slug['slug']);
 
     $data = [
       'posts'  => $posts,
